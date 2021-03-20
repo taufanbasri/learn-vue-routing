@@ -46,6 +46,8 @@ export default {
   },
   created() {
     this.loadTeamMembers(this.teamId);
+    
+    console.log(this.$route.queyr);
   },
   watch: {
     teamId(newId) {
