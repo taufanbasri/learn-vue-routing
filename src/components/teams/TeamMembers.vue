@@ -49,6 +49,11 @@ export default {
     
     console.log(this.$route.queyr);
   },
+  beforeRouteUpdate (to, from, next) {
+    console.log('TeamMembers Cmp beforeRouteUpdate');
+    console.log(to, from);
+    next();
+  },
   watch: {
     teamId(newId) {
       this.loadTeamMembers(newId);

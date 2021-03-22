@@ -24,12 +24,22 @@ const router = createRouter({
                 { name: 'teams-member', path: ':teamId', component: TeamMembers, props: true },
             ]
         },
-        { path: '/users', components: { default: UserList, footer: UsersFooter } },
+        {
+            path: '/users', 
+            components: {
+                default: UserList, 
+                footer: UsersFooter
+            },
+            beforeEnter: (to, from, next) => {
+                console.log('users beforeEnter');
+                console.log(to, from);
+                next();
+            }
+        },
         { path: '/:notFound(.*)', component: NotFound }
     ],
     linkActiveClass: 'active',
-    scrollBehavior (to, from, savedPosition) {
-        console.log(to, from, savedPosition);
+    scrollBehavior (_, _2, savedPosition) {
         if (savedPosition) {
             return savedPosition;
         }
@@ -40,6 +50,18 @@ const router = createRouter({
         }
     }
 });
+
+router.beforeEach(function (to, from, next) {
+    console.log('Global beforeEach');
+    console.log(to, from);
+    next()
+});
+
+router.afterEach((to, from) => {
+    // sending analytics data.
+    console.log('Global afterEach');
+    console.log(to, from);
+})
 
 const app = createApp(App)
 
