@@ -36,7 +36,7 @@ export default {
     console.log('UsersList Cmp beforeRouteLeave');
     console.log(to, from);
 
-    if (this.saveChanges) {
+    if (this.changesSaved) {
       next();
     } else {
       const userWantsToLeave = confirm('Are you sure? You got unsaved changes!');
